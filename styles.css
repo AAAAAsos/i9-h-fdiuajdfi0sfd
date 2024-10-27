@@ -1,0 +1,409 @@
+/* Базовые стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-touch-callout: none; /* Отключает вызов контекстного меню при длительном нажатии */
+  -webkit-user-select: none; /* Отключает выделение на Safari */
+  -ms-user-select: none; /* Отключает выделение на IE */
+  user-select: none; /* Отключает выделение на всех современных браузерах */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.interface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 95%;
+  max-width: 500px;
+  position: relative;
+}
+
+/* Баланс и иконки */
+.balance {
+  display: flex;
+  align-items: center;
+  font-size: 7vw;
+  margin-top: 3vh;
+}
+
+.coin-icon,
+.energy-icon,
+.boost-icon,
+.upgrade-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin: 0 5px;
+}
+
+/* Основная кнопка монеты */
+#coin {
+  width: 50vw;
+  height: 50vw;
+  max-width: 300px;
+  max-height: 300px;
+  background-image: url('coin.png'); /* Изображение монеты */
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin: 4vh 0;
+  position: relative;
+  touch-action: manipulation;
+  outline: none; /* Убирает обводку при нажатии */
+  -webkit-tap-highlight-color: transparent; /* Убирает выделение на мобильных устройствах */
+  transition: transform 0.1s ease; /* Плавный переход для поворота */
+}
+
+/* Убираем выделение кнопок при нажатии */
+button,
+.upgrade-item {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Контейнер для энергии и кнопки Прокачка */
+.energy-boost-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 2vh;
+}
+
+.energy-bar {
+  display: flex;
+  align-items: center;
+  font-size: 5vw;
+}
+
+.boost-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 4vw;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+}
+
+/* Панель прокачки */
+.upgrade-panel {
+  display: none; /* По умолчанию скрыта */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Класс для отображения панели с плавным эффектом */
+.upgrade-panel.open {
+  display: flex;
+  opacity: 1;
+}
+
+.panel-content {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: left;
+}
+
+.upgrade-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upgrade-item:hover {
+  background-color: #444;
+}
+
+.close-panel {
+  background-color: #d9534f;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.close-panel:hover {
+  background-color: #c9302c;
+}
+
+/* Модальное окно для описания улучшения */
+.upgrade-details {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.details-content {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.close-details {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.get-upgrade {
+  background-color: #6c63ff;
+  color: #ffffff;
+  border: none;
+  padding: 15px;
+  margin-top: 15px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.get-upgrade:hover {
+  background-color: #5a52cc;
+}
+
+/* Стиль для +1 при клике */
+.click-effect {
+  position: absolute;
+  font-size: 24px; /* Увеличенный размер для лучшей видимости */
+  color: #ffffff; /* Белый цвет текста */
+  font-weight: bold;
+  animation: fadeUp 1s ease-out;
+  pointer-events: none; /* Отключает возможность взаимодействия с эффектом */
+}
+
+/* Анимация для +1 */
+@keyframes fadeUp {
+  0% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+  100% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+}
+
+/* Контейнер для уведомлений */
+.notification-container {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  z-index: 2000;
+}
+
+/* Стиль для уведомления */
+.notification {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 16px;
+  opacity: 0;
+  animation: fadeInOut 2s ease;
+  min-width: 200px;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.notification.success {
+  background-color: #4CAF50; /* Зеленый для успешной покупки */
+}
+
+.notification.error {
+  background-color: #F44336; /* Красный для неудачной покупки */
+}
+
+.notification .icon {
+  font-size: 18px;
+}
+
+.notification .close-icon {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Анимация появления и исчезновения уведомления */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Увеличенные иконки улучшений */
+.upgrade-icon {
+  width: 60px; /* Увеличенный размер в 2 раза */
+  height: 60px;
+  object-fit: contain;
+  margin: 0 10px;
+}
+/* Стиль блока информации о пользователе */
+.user-info {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+/* Кнопка Друзья */
+.friends-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1000;
+}
+
+/* Панель реферальной системы */
+.referral-panel {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.referral-panel .panel-content {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: left;
+  color: #fff;
+}
+
+.invite-link {
+  margin-top: 10px;
+}
+
+.link-container {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+#invite-link {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #333;
+  border: 1px solid #555;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  text-align: center;
+}
+
+.copy-button {
+  padding: 8px 16px;
+  background-color: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.copy-button:hover {
+  background-color: #5a52cc;
+}
+
+/* Панель закрытия */
+.close-panel {
+  background-color: #d9534f;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.close-panel:hover {
+  background-color: #c9302c;
+}

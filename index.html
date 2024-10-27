@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Кликер с Монетой</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Блок информации о пользователе -->
+    <div class="user-info">
+        <img id="user-avatar" class="user-avatar" alt="Аватар пользователя">
+        <span id="user-name" class="user-name">Пользователь</span>
+    </div>
+
+    <!-- Основной интерфейс -->
+    <div class="interface">
+        <!-- Контейнер для уведомлений -->
+        <div id="notification-container" class="notification-container"></div>
+
+        <!-- Баланс и иконка монеты -->
+        <div class="balance">
+            <span id="balance">0</span>
+            <img src="coin.png" alt="coin" class="coin-icon">
+        </div>
+
+       <!-- Кнопка для открытия панели "Друзья" -->
+<button id="friends-button" class="friends-button">Друзья</button>
+
+<!-- Панель для реферальной системы -->
+<div id="referral-panel" class="referral-panel">
+    <div class="panel-content">
+        <h2>Реферальная система</h2>
+        <p>Мой бонус: <span id="ref-bonus">0</span></p>
+        <p>Мои рефералы: <span id="ref-count">0</span></p>
+
+        <div class="invite-link">
+            <p>Моя реферальная ссылка:</p>
+            <div class="link-container">
+                <input type="text" id="invite-link" readonly>
+                <button id="copy-link" class="copy-button">Копировать</button>
+            </div>
+            <p>🎁 +2.5k Бонус за первого приглашённого</p>
+        </div>
+
+        <h3>Список рефералов:</h3>
+        <ul id="referral-list">
+            <li>У вас пока нет рефералов 😭</li>
+        </ul>
+        <button class="close-panel" onclick="toggleReferralPanel()">Закрыть</button>
+    </div>
+</div>
+
+
+        
+        <!-- Основная кнопка монеты -->
+        <div id="coin" class="coin"></div>
+
+        <!-- Блок для энергии и кнопки Прокачка -->
+        <div class="energy-boost-container">
+            <div class="energy-bar">
+                <img src="energy.png" alt="energy" class="energy-icon">
+                <span id="energy">100 / 100</span>
+            </div>
+            <button id="boost-button" class="boost-button">
+                <img src="boost.png" alt="Boost" class="boost-icon">
+                <span>Прокачка</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Панель прокачки -->
+    <div id="upgrade-panel" class="upgrade-panel">
+        <div class="panel-content">
+            <div class="upgrade-item" onclick="openUpgradeDetails('multitap')">
+                <img src="multitap.png" alt="МультиРобукс" class="upgrade-icon">
+                <div>
+                    <h3>МультиРобукс</h3>
+                    <p>
+                        <img src="coin.png" class="coin-icon"> 
+                        <span id="multitap-cost">200</span> |
+                        <span id="multitap-level">1 уровень</span>
+                    </p>
+                </div>
+                <span class="arrow">➡️</span>
+            </div>
+            <div class="upgrade-item" onclick="openUpgradeDetails('energy')">
+                <img src="energy_limit.png" alt="Лимит энергии" class="upgrade-icon">
+                <div>
+                    <h3>Лимит энергии</h3>
+                    <p>
+                        <img src="coin.png" class="coin-icon"> 
+                        <span id="energy-limit-cost">200</span> |
+                        <span id="energy-limit-level">1 уровень</span>
+                    </p>
+                </div>
+                <span class="arrow">➡️</span>
+            </div>
+            <!-- Новый блок для восстановления энергии -->
+            <div class="upgrade-item" onclick="openUpgradeDetails('restore')">
+                <img src="restore_energy.png" alt="Восстановить энергию" class="upgrade-icon">
+                <div>
+                    <h3>Восстановить энергию</h3>
+                    <p><img src="coin.png" class="coin-icon"> 500</p>
+                </div>
+                <span class="arrow">➡️</span>
+            </div>
+            <button class="close-panel" onclick="togglePanel()">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно для подробностей улучшения -->
+    <div id="upgrade-details" class="upgrade-details">
+        <div class="details-content">
+            <span class="close-details" onclick="closeUpgradeDetails()">✖</span>
+            <div id="upgrade-details-content"></div>
+            <button class="get-upgrade">Купить за 200</button>
+        </div>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
