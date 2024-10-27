@@ -259,7 +259,7 @@ document.getElementById("friends-button").addEventListener("click", toggleReferr
 
 // Функция генерации реферальной ссылки
 function generateReferralLink(ownerId) {
-    return `https://t.me/RobuxTap?start=${ownerId}`;
+    return `https://t.me/RobuxTapBot?start=${ownerId}`;
 }
 
 // Получение ID пользователя из Telegram Mini App
